@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   static const String _PREVIEW_URL =
-      "http://hk-facex-akm.biugoing.com/biugolite/admin/file/1614049891leWAYHQg.png?w=888&h=887";
+      "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2849993288,4096874629&fm=26&gp=0.jpg?w=500&h=500";
   static const String _PC_URL = "https://marki-user.biusq.com";
   static const String _WECHAT_NUMBER = "16626414008";
 
@@ -284,15 +284,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 onTap: () {
                   Clipboard.setData(ClipboardData(text: _PC_URL)).then((value) {
-                    Fluttertoast.showToast(
-                        msg: "复制成功，请在PC客户端打开",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0
-                    );
+                    BotToast.showText(text: "复制成功，请在PC客户端打开");
+                    // Fluttertoast.showToast(
+                    //     msg: "复制成功，请在PC客户端打开",
+                    //     toastLength: Toast.LENGTH_SHORT,
+                    //     gravity: ToastGravity.CENTER,
+                    //     timeInSecForIosWeb: 1,
+                    //     backgroundColor: Colors.red,
+                    //     textColor: Colors.white,
+                    //     fontSize: 16.0
+                    // );
                     //YFlutterToast.showToast(S.of(context).copied_open_in_pc);
                   });
                 })
@@ -362,15 +363,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.w400)),
                   padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
               onTap: () {
-                Fluttertoast.showToast(
-                    msg: "This is Center Short Toast",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0
-                );
+                BotToast.showText(text: "复制微信成功");
+                // Fluttertoast.showToast(
+                //     msg: "This is Center Short Toast",
+                //     toastLength: Toast.LENGTH_SHORT,
+                //     gravity: ToastGravity.CENTER,
+                //     timeInSecForIosWeb: 1,
+                //     backgroundColor: Colors.red,
+                //     textColor: Colors.white,
+                //     fontSize: 16.0
+                // );
                 // FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
                 //   YFlutterToast.showToast(S.of(context).vip_wehcat_copy_success);
                 // });
