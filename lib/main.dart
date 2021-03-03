@@ -1,6 +1,8 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(MyApp());
@@ -282,6 +284,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 onTap: () {
                   Clipboard.setData(ClipboardData(text: _PC_URL)).then((value) {
+                    Fluttertoast.showToast(
+                        msg: "复制成功，请在PC客户端打开",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
                     //YFlutterToast.showToast(S.of(context).copied_open_in_pc);
                   });
                 })
@@ -351,6 +362,15 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.w400)),
                   padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
               onTap: () {
+                Fluttertoast.showToast(
+                    msg: "This is Center Short Toast",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                );
                 // FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
                 //   YFlutterToast.showToast(S.of(context).vip_wehcat_copy_success);
                 // });
