@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    BotToast.init(context);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -368,18 +369,28 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
               onTap: () {
                 _bridge.registerFunction("openWx", (arguments) => null);
-                //BotToast.showText(text: "复制微信成功");
-                // FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
-                //   Fluttertoast.showToast(
-                //       msg: "复制微信成功",
-                //       toastLength: Toast.LENGTH_SHORT,
-                //       gravity: ToastGravity.BOTTOM,
-                //       timeInSecForIosWeb: 1,
-                //       backgroundColor: Colors.red,
-                //       textColor: Colors.white,
-                //       fontSize: 16.0
-                //   );
-                // });
+                BotToast.showText(text: "复制微信成功");
+                FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
+                  Fluttertoast.showToast(
+                      msg: "复制微信成功",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+                }).catchError((onError) {
+                  Fluttertoast.showToast(
+                      msg: "打开失败, msg = ${onError.toString()}",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+                }) ;
               },
             ))
       ],
