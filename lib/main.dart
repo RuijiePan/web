@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jsbridge/jsbridge.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:web/feedback_channel.dart';
 
@@ -334,6 +335,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  static final _bridge = JSBridge("nativeHost");
+
   _copyWechat(BuildContext context) {
     return Row(
       children: <Widget>[
@@ -364,18 +367,19 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.w400)),
                   padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
               onTap: () {
+                _bridge.registerFunction("openWx", (arguments) => null);
                 //BotToast.showText(text: "复制微信成功");
-                FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
-                  Fluttertoast.showToast(
-                      msg: "复制微信成功",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0
-                  );
-                });
+                // FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
+                //   Fluttertoast.showToast(
+                //       msg: "复制微信成功",
+                //       toastLength: Toast.LENGTH_SHORT,
+                //       gravity: ToastGravity.BOTTOM,
+                //       timeInSecForIosWeb: 1,
+                //       backgroundColor: Colors.red,
+                //       textColor: Colors.white,
+                //       fontSize: 16.0
+                //   );
+                // });
               },
             ))
       ],
