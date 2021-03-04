@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:web/feedback_channel.dart';
 
 void main() {
   runApp(MyApp());
@@ -363,19 +364,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.w400)),
                   padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
               onTap: () {
-                BotToast.showText(text: "复制微信成功");
-                // Fluttertoast.showToast(
-                //     msg: "This is Center Short Toast",
-                //     toastLength: Toast.LENGTH_SHORT,
-                //     gravity: ToastGravity.CENTER,
-                //     timeInSecForIosWeb: 1,
-                //     backgroundColor: Colors.red,
-                //     textColor: Colors.white,
-                //     fontSize: 16.0
-                // );
-                // FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
-                //   YFlutterToast.showToast(S.of(context).vip_wehcat_copy_success);
-                // });
+                //BotToast.showText(text: "复制微信成功");
+                FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
+                  Fluttertoast.showToast(
+                      msg: "复制微信成功",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+                });
               },
             ))
       ],
