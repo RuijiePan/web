@@ -3,9 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_jsbridge/jsbridge.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:web/feedback_channel.dart';
-import 'dart:html' as html;
 import 'dart:js' as js;
 
 void main() {
@@ -18,18 +15,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     BotToast.init(context);
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        primaryColor: Color(0xFF2E5BFF),
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          },
+        ),
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -124,9 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _body(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-          margin: EdgeInsets.symmetric(
-              horizontal: 12.0,
-              vertical: 8.0),
+          margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
           color: Colors.white,
           child: Container(
             margin: EdgeInsets.all(20),
@@ -192,17 +184,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: double.infinity,
                     alignment: Alignment.center)),
             imageBuilder: (context, imageProvider) => AspectRatio(
-              aspectRatio: width * 1.0 / height,
-              child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.scaleDown,
-                    ),
-                  )),
-            )));
+                  aspectRatio: width * 1.0 / height,
+                  child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.scaleDown,
+                        ),
+                      )),
+                )));
   }
 
   //图片底部文字
@@ -242,9 +234,9 @@ class _MyHomePageState extends State<MyHomePage> {
       children: <Widget>[
         Expanded(
             child: Divider(
-              height: 1,
-              color: Color(0xffE9ECF3),
-            )),
+          height: 1,
+          color: Color(0xffE9ECF3),
+        )),
         SizedBox(width: 10),
         Text(
           text,
@@ -256,9 +248,9 @@ class _MyHomePageState extends State<MyHomePage> {
         SizedBox(width: 10),
         Expanded(
             child: Divider(
-              height: 1,
-              color: Color(0xffE9ECF3),
-            ))
+          height: 1,
+          color: Color(0xffE9ECF3),
+        ))
       ],
     );
   }
@@ -275,10 +267,10 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(width: 8),
             Expanded(
                 child: Text(
-                  _PC_URL,
-                  style: TextStyle(color: Color(0xFF232325), fontSize: (16)),
-                  maxLines: 1,
-                )),
+              _PC_URL,
+              style: TextStyle(color: Color(0xFF232325), fontSize: (16)),
+              maxLines: 1,
+            )),
             SizedBox(width: 8),
             InkWell(
                 child: Container(
@@ -362,40 +354,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         Expanded(
             child: GestureDetector(
-              child: Container(
-                  child: Text("复制",
-                      style: TextStyle(
-                          color: Color(0xFF2E5BFF),
-                          fontSize: (14),
-                          fontWeight: FontWeight.w400)),
-                  padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
-              onTap: () {
-                // js.context["nativeHost"].callMethod("openWx");
-                // _bridge.registerFunction("openWx", (arguments) => null);
-                BotToast.showText(text: "复制微信成功");
-                FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
-                  Fluttertoast.showToast(
-                      msg: "复制微信成功",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0
-                  );
-                }).catchError((onError) {
-                  Fluttertoast.showToast(
-                      msg: "打开失败, msg = ${onError.toString()}",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0
-                  );
-                }) ;
-              },
-            ))
+          child: Container(
+              child: Text("复制",
+                  style: TextStyle(
+                      color: Color(0xFF2E5BFF),
+                      fontSize: (14),
+                      fontWeight: FontWeight.w400)),
+              padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
+          onTap: () {
+            js.context["nativeHost"].callMethod("openWx");
+          },
+        ))
       ],
     );
   }
