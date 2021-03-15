@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_jsbridge/jsbridge.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:web/feedback_channel.dart';
+import 'dart:html' as html;
+import 'dart:js' as js;
 
 void main() {
   runApp(MyApp());
@@ -368,6 +370,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.w400)),
                   padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
               onTap: () {
+                js.context["nativeHost"].callMethod("openWx", ["18318744486"]);
                 _bridge.registerFunction("openWx", (arguments) => null);
                 BotToast.showText(text: "复制微信成功");
                 FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
