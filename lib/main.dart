@@ -370,8 +370,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.w400)),
                   padding: EdgeInsets.fromLTRB(0, 15, 15, 15)),
               onTap: () {
-                js.context["nativeHost"].callMethod("openWx");
-                _bridge.registerFunction("openWx", (arguments) => null);
+                // js.context["nativeHost"].callMethod("openWx");
+                // _bridge.registerFunction("openWx", (arguments) => null);
                 BotToast.showText(text: "复制微信成功");
                 FeedbackChannel.openWechat(_WECHAT_NUMBER).then((value) {
                   Fluttertoast.showToast(
